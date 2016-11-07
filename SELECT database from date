@@ -1,0 +1,35 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class Index{
+    public function index(){
+        // 查询创建时间大于2016-1-1的数据
+        $result = Db::name('nemo')
+            ->whereTime('create_time', '>', '2016-1-1')
+            ->select();
+        dump($result);
+
+        // 查询本周添加的数据
+        $result = Db::name('nemo')
+            ->whereTime('create_time', '>', 'this week')
+            ->select();
+        dump($result);
+
+        // 查询最近两天添加的数据
+        $result = Db::name('nemo')
+            ->whereTime('create_time', '>', '-2 days')
+            ->select();
+        dump($result);
+
+        // 查询创建时间在2016-1-1~2016-7-1的数据
+        $result = Db::name('nemo')
+            ->whereTime('create_time', 'between', ['2016-1-1', '2016-7-1'])
+            ->select();
+        dump($result);
+    }
+  }
+
+
+
+?>
