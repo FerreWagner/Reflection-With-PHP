@@ -27,6 +27,32 @@
             ->whereTime('create_time', 'between', ['2016-1-1', '2016-7-1'])
             ->select();
         dump($result);
+        
+        
+        //人性化的日期查询方式
+        // 获取今天的数据
+        $result = Db::name('data')
+            ->whereTime('create_time', 'today')
+            ->select();
+        dump($result);  
+
+        // 获取昨天的数据
+        $result = Db::name('data')
+            ->whereTime('create_time', 'yesterday')
+            ->select();
+        dump($result);  
+
+        // 获取本周的数据
+        $result = Db::name('data')
+            ->whereTime('create_time', 'week')
+            ->select();   
+        dump($result);      
+
+        // 获取上周的数据
+        $result = Db::name('data')
+            ->whereTime('create_time', 'last week')
+            ->select(); 
+        dump($result);    
     }
   }
 
