@@ -1,0 +1,17 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  public function index(){
+    //查询think_data表里name存在thinkphp字符、id<10或者在1,3,5,7中的数据
+    $result = Db::table('think_data')->where(['name' => ['like','%think%'],'id' => [['<',10],['between','1,3,5,7'],'or']])->select();
+    var_dump($result);
+    
+    //快捷查询;查询nemo表里id或status小于4的数据，取10个
+    $result2 = Db::table('nemo')->where('id|status','<',4)->limit(10)->select();
+    var_dump($result2);
+  }
+
+
+
+?>
