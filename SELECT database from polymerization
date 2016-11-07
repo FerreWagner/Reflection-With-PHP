@@ -1,0 +1,21 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class Index{
+    public function index(){
+    
+      //统计nemo表的数据
+      $num = Db::name('nemo')->where('num',1)->count();
+      var_dump($num);
+      //统计最大值
+      $max = Db::name('nemo')->where('num',1)->max();
+      var_dump($max);
+    }
+  }
+
+
+
+
+
+?>
