@@ -1,0 +1,27 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class index{
+    public function index(){
+        Db::name('user')->where('status', '>', 0)->chunk(100, function ($list) {
+          // 处理100条记录
+          foreach($list as $data){
+            
+          }
+      }, 'id'); //以id字段进行排序
+      
+      然后交给callback进行数据处理，处理完毕后继续查询下一个100条记录，如果你需要在中途中断后续的查询，只需要在callback方法调用中返回false即可，例如：
+
+        Db::name('data')->where('status','>',0)->chunk(100,function($list){
+        foreach($list as $data){
+            // 返回false则中断后续查询
+            return false;        
+        }
+    });
+    }
+  }
+
+
+
+?>
