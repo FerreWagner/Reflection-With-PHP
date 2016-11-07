@@ -1,0 +1,14 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class index{
+    public function index(){
+      $result = Db::name('data')->where('id','>=',20)->order('id',desc)->limit(10)->select();
+      dump($resylt);
+    }
+  }
+
+//use thinkphp about where & order
+
+?>
