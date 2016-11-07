@@ -1,0 +1,17 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class Index{
+    public function index(){
+      //使用query对象
+        $query = new \think\db\Query;
+        $query->name('data')->where('name','like','%think%')->where('id','in','1,2,3,4,5,6')->limit(10);
+        $result = Db::select($query);
+        dump($result);
+    }
+  }
+
+
+
+?>
