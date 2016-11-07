@@ -1,0 +1,17 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class Index{
+    public function index(){
+      $result = Db::name('data')->where(['id' => ['in','123'],'name' => ['like','%papy%'],]);
+      var_dump($result);
+    }
+    
+    
+  }
+
+
+
+
+?>
