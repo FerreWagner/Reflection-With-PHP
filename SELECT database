@@ -1,0 +1,25 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class Index{
+    public function index(){
+      //获取某一行的某个值：获取nemo表里id为20的info字段数据    
+      $data = Db::name('nemo')->where('id',20)->value('info');
+      var_dump($name);
+      
+      //获取列数据：获取nemo表里状态为1的name列的数据
+      $data2 = Db::name('nemo')->where('status',1)->column('name');
+      var_dump($list);
+      //获取以id为索引的name列数据
+      $data3 = Db::name('nemo')->where('status',1)->column('name','id');
+      var_dump($list);
+      //获取以主键为索引的name列数据
+      $data4 = Db::name('nemo')->where('status',1)->column('*','id');
+      var_dump($list);
+      
+    }
+  }
+
+
+?>
