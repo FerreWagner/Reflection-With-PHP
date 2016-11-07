@@ -1,0 +1,16 @@
+<?php
+  namespace app\index\controller;
+  use think\Db;
+  
+  class Index{
+    Db::transaction(function (){
+      Db::table('demo')->delete(3);
+      Db::table('think_data')->insert(['name' => 'what']);
+      Db::table('fate')->where('id',10)->update('name' => 'new');
+    });
+  }
+
+
+
+
+?>
