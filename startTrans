@@ -1,0 +1,21 @@
+<?php
+  namespace app\index\controller;
+  use thikn\Db;
+  
+  public function index(){
+    //启动事务
+    Db::startTrans();
+    try{
+      Db::table('data')->delete(10);
+      Db::table('data')->insert(['name' => 'fate','status' => 1]);
+      //提交事务
+      Db::commit();
+    }catch(\Exception $e){
+      //回滚事务
+      Db::rollback();
+    }
+  }
+
+
+
+?>
