@@ -1,0 +1,17 @@
+<?php 
+namespace app\index\controller;
+use think\Db;
+
+class Index
+{
+    public function Index(){
+        //字符串查询，配合参数绑定使用，可以避免注入问题
+        $result = Db::table('nemo')->where('id > :id and name is not null', ['id' => 16])->select();
+        dump($result);    
+    }
+    
+}
+
+
+
+?>
