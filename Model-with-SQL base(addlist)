@@ -1,0 +1,22 @@
+<?php 
+    namespace app\index\controller;
+    
+    use app\index\model\User as UserModel;
+    
+    class User{
+        public function addlist(){
+            $user = new UserModel;
+            $list = [
+                    ['nickname' => 'three','email' => '65@163.com','birthday' => strtotime('1928-01-15')],
+                    ['nickname' => 'one','email' => '12@162.com','birthday' => strtotime('1928-01-15')],
+            ];
+            if($user->saveAll($list)){
+                return 'add success';
+            }else{
+                return $user->getError();
+            }
+        }
+    }
+  //TIPS:这里用URL访问时，一定为add_list,否则由于命名规范原因，将会报错
+
+?>
