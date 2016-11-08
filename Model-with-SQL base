@@ -1,0 +1,43 @@
+<?php
+  namespace app\index\controller;
+  
+  use app\index\model\User as UserModel;  //做别名，避免重复;可以在config里修改controller_suffix(控制器类后缀)为true，就可以达到不用别名的效果
+  
+  class User{
+    public function add(){
+      //根据数据表的结构新增用户数据
+      $user = new UserModel;
+      $user->username = 'hello';
+      $user->password = '123456';
+      $user->info = 'other';
+      $user->age = '30';
+      $user->birthday = strtotime('1990-10-10');
+      if($user->save()){
+        return 'user:'.$user->name.'add success';
+      }else{
+        return $user->getError();
+      }
+    }
+
+      //If you think it's too cumbersome to assign objects,this way:
+    public function add(){
+      $user['username'] = 'hello';
+      $user['password'] = '123456';
+      $user['info'] = 'other';
+      $user['age'] = '30';
+      $user['birthday'] = strtotime('1990-10-10');
+      if($result = UserModel::create($user)){
+        return 'user:'.$user->username.'add success';
+      }else{
+        return 'add error';
+      }
+    }
+      
+    
+  }
+
+
+
+
+
+?>
