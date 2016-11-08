@@ -1,0 +1,30 @@
+<?php 
+    namespace app\index\controller;
+    
+    use app\index\model\User as UserModel;
+    
+    class User{      
+        public function delete($id){
+            $user = UserModel::get($id);    //根据URL里传的ID来删除
+            if($user){
+                $user->delete();
+                return 'data delete success';
+            }else{
+                return 'data is not exist';
+            }
+        }
+        
+        //同样我们也可以直接使用destroy方法删除模型数据，例如把上面的delete方法改成如下：
+        public function delete($id){
+            $result = UserModel::destroy($id);
+            if ($result) {
+                return 'data delete success';
+            } else {
+                return 'data is not exist';
+            }
+      }
+        
+    }
+        //访问的URL为：http://tp.com/user/delete/3   数字代表被删除的数据id
+
+?>
