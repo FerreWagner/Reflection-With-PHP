@@ -5,7 +5,7 @@
     
     class User{
         //读取用户数据
-        public function read($id = ''){
+        public function read($id = ''){     //从URL得到id值
             $user = UserModel::get($id);
             echo $user->username.'<br />';
             echo $user->info.'<br />';
@@ -16,5 +16,49 @@
     //访问URL时：在user控制器后访问/1、/2等，直接访问数据,如：http://tp.com/user/2
     //TIPS:模型的get方法和Db类的find方法返回结果的区别在于，Db类默认返回的只是数组（注意这里说的默认，其实仍然可以设置为对象），而模型的get方法查询返回的一定是当前的模型对象实例。
 
+    //但是系统为模型实现了ArrayAccess接口，因此仍然可以通过数组的方式访问对象实例，把控制器的read操作方法改成如下：
+
+    // 读取用户数据
+    public function read($id = '')
+    {
+        $user = UserModel::get($id);
+        echo $user['username'] . '<br/>';
+        echo $user['info'] . '<br/>';
+        echo date('Y/m/d', $user['birthday']) . '<br/>';
+    }
+    
+    //如果想用username来查询模型数据的话，该如何操作？
+    // 根据username读取用户数据
+    public function read()
+    {
+        $user = UserModel::getByUsername('Ferre Wagner');
+        echo $user->username . '<br/>';
+        echo $user->info . '<br/>';
+        echo date('Y/m/d', $user->birthday) . '<br/>';
+    }
+    //在URL里输入：http://tp.com/user/1进行测试
+    
+    
+    //如果不是根据主键查询的话，可以传入数组作为查询条件，例如：
+    //根据nickname读取用户数据
+    public function read()
+    {
+        $user = UserModel::get(['username'=>'Ferre']);
+        echo $user->info . '<br/>';
+        echo $user->password . '<br/>';
+        echo date('Y/m/d', $user->birthday) . '<br/>';
+    }
+    
+    
+    //更复杂的查询则可以使用查询构建器来完成，例如：
+    // 根据nickname读取用户数据
+    public function read()
+    {
+        $user = UserModel::where('username', 'nemo')->find();   //使用find来查询单条的username等于nemo的数据
+        echo $user->nickname . '<br/>';
+        echo $user->email . '<br/>';
+        echo date('Y/m/d', $user->birthday) . '<br/>';
+    }
+    
 
 ?>
