@@ -1,0 +1,34 @@
+<?php 
+    namespace app\index\controller;
+    
+    use app\index\model\User as UserModel;
+    
+    class User{
+            public function update($id){
+              $user = UserModel::get($id);
+              $user->username = 'xiaoliu';
+              $user->info = 'asd';         
+              if(false !== $user->save()){
+                  return 'data update success';
+              }else{
+                  return $user->getError();
+              }
+              
+            //ActiveRecord模式的更新数据方式需要首先读取对应的数据，如果需要更高效的方法可以把update方法改成：
+            // 更新用户数据
+            public function update($id){
+                $user['id']       = (int) $id;
+                $user['username'] = 'Ferre';
+                $user['email']    = 'fate@990.com';
+                $result           = UserModel::update($user); //将数据放入$user数组中，然后以数组的形式全部update，效率更高
+                return '更新用户成功';
+            }
+          }
+          
+          //TIPS:此处访问http://tp.com/user/update/1    //把id为1的数据的username改为xiaoliu、info改为asd
+          //默认情况下，查询模型数据后返回的模型示例执行save操作都是执行的数据库update操作，
+          //如果你需要实例化执行save执行数据库的insert操作，请确保在save方法之前调用isUpdate方法：$user->isUpdate(false)->save();
+    }
+
+
+?>
