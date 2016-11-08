@@ -40,7 +40,7 @@
     
     
     //如果不是根据主键查询的话，可以传入数组作为查询条件，例如：
-    //根据nickname读取用户数据
+    //根据username读取用户数据
     public function read()
     {
         $user = UserModel::get(['username'=>'Ferre']);
@@ -51,11 +51,11 @@
     
     
     //更复杂的查询则可以使用查询构建器来完成，例如：
-    // 根据nickname读取用户数据
+    // 根据username读取用户数据
     public function read()
     {
         $user = UserModel::where('username', 'nemo')->find();   //使用find来查询单条的username等于nemo的数据
-        echo $user->nickname . '<br/>';
+        echo $user->username . '<br/>';
         echo $user->email . '<br/>';
         echo date('Y/m/d', $user->birthday) . '<br/>';
     }
