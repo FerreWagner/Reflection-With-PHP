@@ -1,0 +1,41 @@
+<?php 
+    namespace app\index\controller;
+    
+    use app\index\model\User as UserModel;
+    
+    class User{
+        public function index(){
+            $list = UserModel::all();   //all()方法查询所有的数据
+            foreach ($list as $user){
+                echo $user->username.'<br />';
+                echo $user->info.'<br />';;
+                echo date('Y/m/d',$user->birthday).'<br />';
+            }
+        }
+        
+        //这里用非主键查询的方式，查询status状态为1的所有数据
+        public function index(){
+            $list = UserModel::all(['status' => 1]);
+            foreach ($list as $user){
+                echo $user->username.'<br />';
+                echo $user->info.'<br />';;
+                echo date('Y/m/d',$user->birthday).'<br />';
+            }
+
+        //这里使用数据库的查询构建器完成更多的条件查询
+        public function index(){
+            $list = UserModel::where('id','<',9)->select();   //查询id小于9的数据
+            foreach ($list as $user) {
+                echo $user->username . '<br/>';
+                echo $user->info . '<br/>';
+                echo date('Y/m/d', $user->birthday) . '<br/>';
+            }
+        }
+            
+    }
+    //TIPS:访问http://tp.com/user/index,因为此处为index方法，域名采用index.php(入口文件)/index(模块)/index(控制器)/index(方法)/  的方式访问
+    
+    
+
+
+?>
