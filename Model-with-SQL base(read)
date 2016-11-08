@@ -1,0 +1,20 @@
+<?php 
+    namespace app\index\controller;
+    
+    use app\index\model\User as UserModel;
+    
+    class User{
+        //读取用户数据
+        public function read($id = ''){
+            $user = UserModel::get($id);
+            echo $user->username.'<br />';
+            echo $user->info.'<br />';
+            echo date('Y/m/d', $user->birthday).'<br />';
+        }
+    }
+    
+    //访问URL时：在user控制器后访问/1、/2等，直接访问数据,如：http://tp.com/user/2
+    //TIPS:模型的get方法和Db类的find方法返回结果的区别在于，Db类默认返回的只是数组（注意这里说的默认，其实仍然可以设置为对象），而模型的get方法查询返回的一定是当前的模型对象实例。
+
+
+?>
