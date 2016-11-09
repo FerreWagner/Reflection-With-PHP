@@ -1,0 +1,35 @@
+<?php
+  namespace app\index\model;
+  use think\Model;
+
+  class User extends Model{
+      // 定义类型转换
+      protected $type = [
+          'birthday'    => 'timestamp:Y/m/d',
+      ];
+
+      // 定义时间戳字段名
+      protected $createTime = 'create_at';    //创建时间的时间戳会自动的存入create_at字段
+      protected $updateTime = 'update_at';    //修改时间的时间戳会自动的存入update_at字段
+
+  }
+  
+?>
+
+<?php
+  namespace app\index\model;
+  use think\Model;
+
+  class User extends Model{
+      // 定义类型转换
+      protected $type = [
+          'birthday'    => 'timestamp:Y/m/d',
+      ];
+      
+      //如果个别数据表不需要自动写入时间戳字段的话，也可以在模型里面直接关闭：
+      // 关闭自动写入时间戳
+      protected $autoWriteTimestamp = false;
+
+  }
+  
+?>
