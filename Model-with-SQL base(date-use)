@@ -11,6 +11,12 @@ class User extends Model
     protected function getBirthdayAttr($birthday){
         return date('Y-m-d', $birthday);
     }
+    //读取器还可以定义读取数据表中不存在的属性，例如把原始生日和转换的格式分开两个属性birthday和user_birthday，我们只需定义user_birthday属性的读取器方法
+    // user_birthday读取器
+    protected function getUserBirthdayAttr($value,$data){
+        return date('Y-m-d', $data['birthday']);
+    }
+    //这里的读取器方法使用了第二个参数，表示传入所有的属性数据。因为原始的user_birthday属性数据是不存在的，所以我们需要通过data参数获取
 
 ?>
 
@@ -28,6 +34,16 @@ In Contreller
           echo $user->info . '<br/>';
           echo $user->birthday . '<br/>';
       }
+      
+    //read操作方法修改为：
+    // 读取用户数据
+    public function read($id=''){
+        $user = UserModel::get($id);
+        echo $user->username . '<br/>';
+        echo $user->email . '<br/>';
+        echo $user->birthday . '<br/>';
+        echo $user->user_birthday . '<br/>';    //user_birthday对应读取器的getUserBirthdayAttr
+    }
   }
 
   //此时,访问http://tp.com/user/5   对birthday的时间戳转换为年月日时间
