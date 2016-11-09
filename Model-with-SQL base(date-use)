@@ -1,0 +1,36 @@
+In Model
+
+<?php
+namespace app\index\model;
+
+use think\Model;
+
+class User extends Model
+{
+    // birthday读取器
+    protected function getBirthdayAttr($birthday){
+        return date('Y-m-d', $birthday);
+    }
+
+?>
+
+
+In Contreller
+
+<?php
+  namespace app\index\model\User as UserModel;
+  use think\Model;
+  
+  class User extends Model{
+    public function read($id = ''){
+          $user = UserModel::get($id);
+          echo $user->username . '<br/>';
+          echo $user->info . '<br/>';
+          echo $user->birthday . '<br/>';
+      }
+  }
+
+  //此时,访问http://tp.com/user/5   对birthday的时间戳转换为年月日时间
+
+
+?>
