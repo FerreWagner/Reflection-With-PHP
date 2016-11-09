@@ -1,0 +1,25 @@
+    默认的时间戳字段类型是整型，如果需要使用其它的时间字段类型，可以做如下设置：
+
+    <?php
+    namespace app\index\model;
+
+    use think\Model;
+
+    class User extends Model{
+        // 定义类型转换
+        protected $type = [
+            'birthday'    => 'timestamp:Y/m/d',
+        ];
+
+        // 指定自动写入时间戳的类型为dateTime类型
+        protected $autoWriteTimestamp = 'datetime';
+
+    }
+
+    如果全局的自动时间戳的类型是统一的，也可以直接在数据库配置文件中设置：
+
+    // 开启自动写入时间戳字段
+    //'auto_timestamp' => 'datetime',
+
+    //经过这样的设置，think_user数据表中的create_time和 update_time 字段类型就必须更改为datetime类型的格式。
+    //TIPS：支持设置的时间戳类型包含：datetime、date和timestamp。
