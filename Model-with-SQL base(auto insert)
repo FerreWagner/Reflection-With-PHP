@@ -1,0 +1,39 @@
+<?php
+namespace app\index\model;
+
+use think\Model;
+
+class User extends Model{
+    // 定义类型转换
+    protected $type = [
+        'birthday'    => 'timestamp:Y/m/d',
+    ];
+    // 定义自动完成的属性
+    protected $insert = ['status' => 1];
+    
+    //这是user模型
+}
+
+
+<?php 
+    namespace app\index\controller;
+    
+    use app\index\model\User as UserModel;
+//     use think\Model;
+                    
+    class User{
+            public function insert($id){
+                $user = new UserModel;
+                $user->nickname = 'godie';
+                $user->email = 'unknow';
+                $user->birthday = '1977-09-09';
+                if($user->save()){
+                    return '用户：'.$user->nickname.'新增成功';
+                }else{
+                    return $user->getError();
+                }
+        }
+        //这是user控制器,当新增数据时,status会设置为1;
+    }
+
+?>
